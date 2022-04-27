@@ -18,7 +18,7 @@ if (fs.existsSync(filePath)) {
         .prompt({
         type: "confirm",
         message:
-            "Your 'dist' folder already contains a 'aTeam.html' file with specific details in it. Do you want to overwrite it?",
+            "The 'dist' folder already contains a 'aTeam.html' file with specific details in it. Do you want to overwrite it?",
         name: "rewrite",
     })
     .then(async (response) => {
@@ -26,7 +26,7 @@ if (fs.existsSync(filePath)) {
         if ((await rewrite) === true) {
           // greeting message after you have overwritten the previous code
         console.log(
-            "Hello Everyone, Welcome to my Team Profile Generator App. Let's get started with creating your team."
+            "Welcome to The Team Profile Creator App. Let's get started with creating your team."
         );
         addNew();
         } else if ((await rewrite) === false) {
@@ -106,7 +106,7 @@ questIntern = [
     type: "input",
     name: "school",
     message:
-        "Please enter the name of the school from where the intern has studied.If he/she has still not completed his school then type 'Not Applicable' : ",
+        "Please enter the name of the school from where the intern has studied. If he/she has still not completed his school then type 'Not Applicable' : ",
     validate: (school) => {
         if (school) {
         return true;
