@@ -12,115 +12,115 @@ const extractData = require("./lib/renderFile");
 
 // begin function and messages to start the code
 const begin = () => {
-  if (fs.existsSync(filePath)) {
+if (fs.existsSync(filePath)) {
     // to rewrite an old file
     inquirer
-      .prompt({
+        .prompt({
         type: "confirm",
         message:
-          "Your 'dist' folder already contains a 'aTeam.html' file with specific details in it. Do you want to overwrite it?",
+            "Your 'dist' folder already contains a 'aTeam.html' file with specific details in it. Do you want to overwrite it?",
         name: "rewrite",
-      })
-      .then(async (response) => {
+    })
+    .then(async (response) => {
         let rewrite = response.rewrite;
         if ((await rewrite) === true) {
           // greeting message after you have overwritten the previous code
-          console.log(
+        console.log(
             "Hello Everyone, Welcome to my Team Profile Generator App. Let's get started with creating your team."
-          );
-          addNew();
+        );
+        addNew();
         } else if ((await rewrite) === false) {
-          console.log(
+        console.log(
             "Sorry, your file cannot be overwritten. Please try again"
-          );
+        );
         }
-      });
-  } else {
+    });
+} else {
     console.log(" Let's create your team");
     addNew();
-  }
+}
 };
 
 // Questions that are common for all the employees
 const quest = [
-  {
+{
     type: "input",
     message: "Please enter the name of the employee: ",
     name: "empName",
-  },
-  {
+},
+{
     type: "input",
     name: "empEmail",
     message: "Enter the email for the employee: ",
-  },
-  {
+},
+{
     type: "input",
     name: "empID",
     message: "Enter the id number for the employee: ",
-  },
-  {
+},
+{
     type: "list",
     name: "empRole",
     message: "Choose the type of role that best suits the employee: ",
     choices: ["Manager", "Engineer", "Intern"],
-  },
+},
 ];
 
 // Questions that are only for the manager(s)
 questManager = [
-  {
+{
     type: "input",
     name: "empOfficeCountNumber",
     message: "Please enter the manager's office contact number: ",
     validate: (empOfficeCountNumber) => {
-      if (empOfficeCountNumber) {
+        if (empOfficeCountNumber) {
         return true;
-      } else {
+    } else {
         console.log("You are required to enter a contact number");
         return false;
-      }
+    }
     },
-  },
+},
 ];
 
 // Questions that are only for the engineer(s)
 questEngineer = [
-  {
+{
     type: "input",
     name: "empGithub",
     message: "Please enter the engineer's Github Username: ",
     validate: (empGithub) => {
-      if (empGithub) {
+        if (empGithub) {
         return true;
-      } else {
+    } else {
         console.log("You are required to enter a username");
         return false;
-      }
+    }
     },
-  },
+},
 ];
 
 // Questions that are only for the intern(s)
 questIntern = [
-  {
+{
     type: "input",
     name: "school",
     message:
-      "Please enter the name of the school from where the intern has studied.If he/she has still not completed his school then type 'Not Applicable' : ",
+        "Please enter the name of the school from where the intern has studied.If he/she has still not completed his school then type 'Not Applicable' : ",
     validate: (school) => {
-      if (school) {
+        if (school) {
         return true;
-      } else {
+    } else {
         console.log("You are required to enter a school name");
         return false;
-      }
+    }
     },
-  },
+},
 ];
 
 // Create a newunction to add new employees
 const addNew = async () => {
-  await inquirer.prompt(quest).then((response) => {
+    await inquirer.prompt(quest).then((response) => {
     let empName = response.empName;
     let empID = response.empID;
     let empEmail = response.empEmail;
@@ -130,33 +130,33 @@ const addNew = async () => {
     let school;
 
     if (empRole === "Engineer") {
-      inquirer.prompt(questEngineer).then((response) => {
+    inquirer.prompt(questEngineer).then((response) => {
         empGithub = response.empGithub;
         let employee = new Engineer(empName, empID, empEmail, empGithub);
         emptyList.push(employee);
         addNewEmployee(emptyList);
-      });
+    });
     } else if (empRole === "Manager") {
-      inquirer.prompt(questManager).then((response) => {
+        inquirer.prompt(questManager).then((response) => {
         empOfficeCountNumber = response.empOfficeCountNumber;
         let employee = new Manager(
-          empName,
-          empID,
-          empEmail,
-          empOfficeCountNumber
+            empName,
+            empID,
+            empEmail,
+            empOfficeCountNumber
         );
         emptyList.push(employee);
         addNewEmployee(emptyList);
-      });
+    });
     } else if (empRole === "Intern") {
-      inquirer.prompt(questIntern).then((response) => {
+        inquirer.prompt(questIntern).then((response) => {
         school = response.school;
         let employee = new Intern(empName, empID, empEmail, school);
         emptyList.push(employee);
         addNewEmployee(emptyList);
-      });
+    });
     }
-  });
+});
 };
 
 
