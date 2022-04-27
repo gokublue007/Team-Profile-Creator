@@ -159,6 +159,34 @@ const addNew = async () => {
 });
 };
 
+// optional; added a function for adding a new employee of any type. It will keep on working till you enter NO(n). 
+const addNewEmployee = async (array) => {
+    await inquirer
+        .prompt({
+        type: "confirm",
+        name: "addNewEmployee",
+        message: "Would you like to add another employee to your team?",
+    })
+    .then(async (response) => {
+        let makeNew = response.addNewEmployee;
+        if ((await makeNew) === true) {
+            addNew();
+        } else if ((await makeNew) === false) {
+            if (!fs.existsSync(fileDirName)) {
+            fs.mkdirSync(fileDirName);
+        }
+            fs.writeFile(filePath, extractData(array), (err) => {
+            if (err) {
+                return console.log(err);
+            }
+            console.log(
+                " Congratulations!! Your aTeam.html file has been generated with all the details provided by you. Please check your dist folder for more details. "
+            );
+        });
+        }
+    });
+};
+
 
 // Function call to initialize app
 begin();
