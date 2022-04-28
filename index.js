@@ -2,16 +2,17 @@
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const Manager = require("./lib/Manager");
+const engineerHTML = require("./src/Engineer");
+const internHTML = require("./src/Intern");
+const managerHTML = require("./src/Manager");
+const generateHTML = require("./src/generateHtml");
 const inquirer = require("inquirer");
 const fs = require("fs");
 const path = require("path");
 const emptyList = [];
 const fileDirName = path.resolve(__dirname, "dist");
-const filePath = path.join(fileDirName, "aTeam.html");
-const engineerHTML = require("./src/Engineer");
-const internHTML = require("./src/Intern");
-const managerHTML = require("./src/Manager");
-const generateHTML = require("./src/generateHtml");
+const filePath = path.join(fileDirName, "team.html");
+
 
 
 // begin function and messages to start the code
@@ -22,7 +23,7 @@ if (fs.existsSync(filePath)) {
         .prompt({
         type: "confirm",
         message:
-            "The 'dist' folder already contains a 'aTeam.html' file with specific details in it. Do you want to overwrite it?",
+            "The 'dist' folder already contains a 'team.html' file with specific details in it. Do you want to overwrite it?",
         name: "rewrite",
     })
     .then(async (response) => {
@@ -177,17 +178,6 @@ const addNewEmployee = async (array) => {
             addNew();
         } else if ((await makeNew) === false) {
             makeHTML()
-            // if (!fs.existsSync(fileDirName)) {
-            // fs.mkdirSync(fileDirName);
-        // }
-        //     fs.writeFile(filePath, extractData(array), (err) => {
-        //     if (err) {
-        //         return console.log(err);
-        //     }
-        //     console.log(
-        //         " Congratulations!! Your aTeam.html file has been generated with all the details provided by you. Please check your dist folder for more details. "
-        //     );
-        // });
         }
     });
 };
