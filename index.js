@@ -8,7 +8,11 @@ const path = require("path");
 const emptyList = [];
 const fileDirName = path.resolve(__dirname, "dist");
 const filePath = path.join(fileDirName, "aTeam.html");
-const extractData = require("./lib/renderFile");
+const engineerHTML = require("./src/Engineer");
+const internHTML = require("./src/Intern");
+const managerHTML = require("./src/Manager");
+const generateHTML = require("./src/generateHtml");
+
 
 // begin function and messages to start the code
 const begin = () => {
@@ -172,21 +176,34 @@ const addNewEmployee = async (array) => {
         if ((await makeNew) === true) {
             addNew();
         } else if ((await makeNew) === false) {
-            if (!fs.existsSync(fileDirName)) {
-            fs.mkdirSync(fileDirName);
-        }
-            fs.writeFile(filePath, extractData(array), (err) => {
-            if (err) {
-                return console.log(err);
-            }
-            console.log(
-                " Congratulations!! Your aTeam.html file has been generated with all the details provided by you. Please check your dist folder for more details. "
-            );
-        });
+            makeHTML()
+            // if (!fs.existsSync(fileDirName)) {
+            // fs.mkdirSync(fileDirName);
+        // }
+        //     fs.writeFile(filePath, extractData(array), (err) => {
+        //     if (err) {
+        //         return console.log(err);
+        //     }
+        //     console.log(
+        //         " Congratulations!! Your aTeam.html file has been generated with all the details provided by you. Please check your dist folder for more details. "
+        //     );
+        // });
         }
     });
 };
-
+const makeHTML = async() => {
+    let cards = ''
+    emptyList.forEach(employee => {
+        if (employee.getRole() === "Manager") {
+            cards = cards + managerHTML(employee) 
+        } else if (employee.getRole() === "Engineer") {
+            cards = cards + engineerHTML(employee)
+        } else if(employee.getRole() === "Intern") {
+            cards = cards + internHTML(employee);
+        } 
+    }) 
+    fs.writeFileSync("./dist/team.html", generateHTML(cards))
+}
 
 // Function call to initialize app
 begin();
