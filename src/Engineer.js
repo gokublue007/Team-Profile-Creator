@@ -7,9 +7,9 @@ function engineer(engineer) {
     </div>
     <div class="card-body">
         <ul class="list-group">
-            <li class="list-group-item bg-light"><em>ID:</em> {{ id }}</li>
+            <li class="list-group-item bg-light"><em>ID:</em>${engineer.id}</li>
             <li class="list-group-item bg-light"><em>Email:</em> <a href="mailto:${engineer.email}">${engineer.email}</a></li>
-            <li class="list-group-item bg-light"><em>GitHub:</em> <a href="https://github.com/${engineer.github}" target="_blank">{{ github }}</a></li>
+            <li class="list-group-item bg-light"><em>GitHub:</em> <a href="https://github.com/${engineer.github}">${engineer.github}</a></li>
         </ul>
     </div>
 </div>`

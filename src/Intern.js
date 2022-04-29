@@ -7,7 +7,7 @@ function intern(intern) {
     </div>
     <div class="card-body">
         <ul class="list-group">
-            <li class="list-group-item bg-light"><em>ID:</em> {{ id }}</li>
+            <li class="list-group-item bg-light"><em>ID:</em>${intern.id}</li>
             <li class="list-group-item bg-light"><em>Email:</em> <a href="email:${intern.email}">${intern.email}</a></li>
             <li class="list-group-item bg-light"><em>School:</em> ${intern.school}</li>
         </ul>

@@ -123,7 +123,7 @@ questIntern = [
 },
 ];
 
-// Create a newunction to add new employees
+// Create a new function to add new employees
 const addNew = async () => {
     await inquirer.prompt(quest).then((response) => {
     let empName = response.empName;
