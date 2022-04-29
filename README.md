@@ -17,6 +17,8 @@
 
 ## Deployment
 
+![Project Image](./img/10-object-oriented-programming-homework-demo.png)
+
 - [Video Demonstration](https://drive.google.com/file/d/1QX801n59Cz6Tq7mue_XqhZtAJkwaJZKY/view?usp=sharing)
 
 ---
